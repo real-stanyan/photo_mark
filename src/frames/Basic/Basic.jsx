@@ -53,11 +53,12 @@ const Basic = ({image, exifData}) => {
           ]}>
           <Image
             source={LogoDatabase[logo]}
-            style={{
-              width: 50,
-              height: 50,
-              resizeMode: 'contain',
-            }}
+            style={[
+              logo === 'fujifilm'
+                ? {width: 70, height: 70}
+                : {width: 30, height: 30},
+              {resizeMode: 'contain'},
+            ]}
           />
           <View style={{marginLeft: 10}}>
             <Text style={styles.LensModel}>

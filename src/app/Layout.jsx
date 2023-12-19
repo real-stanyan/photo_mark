@@ -6,6 +6,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Main from '../pages/Main/Main';
 import Display from '../pages/Display/Display';
+import Frame from '../pages/Frame/Frame';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,13 @@ const Layout = () => {
             title: 'Photo Mark',
           }}
         />
+        {/* <Stack.Screen
+          name="Frame"
+          component={Frame}
+          options={{
+            title: 'Photo Mark',
+          }}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

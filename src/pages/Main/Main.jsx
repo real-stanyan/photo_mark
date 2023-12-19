@@ -1,4 +1,11 @@
-import {View, Text, Image, TouchableOpacity, Animated} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+} from 'react-native';
 import React from 'react';
 
 import {useState, useEffect, useRef} from 'react';
@@ -8,6 +15,8 @@ import Exif from 'react-native-exif';
 import styles from './Main_style';
 
 const Main = ({navigation}) => {
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
   const [image, setImage] = useState(null);
   const [imageData, setImageData] = useState(null);
   const [init, setInit] = useState(true);
@@ -66,14 +75,34 @@ const Main = ({navigation}) => {
               styles.logo_container,
               {opacity: fadeAnim}, // 应用动画透明度
             ]}>
-            <Text>Developed By</Text>
+            <Text style={{fontFamily: 'Orbitron-VariableFont_wght'}}>
+              Developed By
+            </Text>
             <Image
               source={require('../../logos/redroom_logo.png')}
-              style={styles.init_img}
+              // style={styles.init_img}
+              style={{
+                width: windowWidth * 0.5,
+                height: windowWidth * 0.5,
+                resizeMode: 'contain',
+              }}
             />
           </Animated.View>
         ) : (
-          <TouchableOpacity style={styles.upload_btn} onPress={selectImage}>
+          <TouchableOpacity
+            style={[
+              {width: windowWidth * 0.9, height: windowWidth * 0.5},
+              styles.upload_btn,
+            ]}
+            onPress={selectImage}>
+            <Image
+              source={require('../../../assets/icons/upload.png')}
+              style={{
+                width: windowWidth * 0.25,
+                height: windowWidth * 0.25,
+                resizeMode: 'contain',
+              }}
+            />
             <Text style={styles.upload_btn_text}>upload your photo</Text>
           </TouchableOpacity>
         )}

@@ -19,13 +19,17 @@ const Layout = () => {
           component={Main}
           options={{
             title: 'Photo Mark',
+            headerTitleStyle: {
+              fontFamily: 'RubikDoodleShadow-Regular',
+              fontSize: 30,
+            },
           }}
         />
         <Stack.Screen
           name="Display"
           component={Display}
           options={{
-            title: 'Photo Mark',
+            title: 'Choose Frame',
           }}
         />
         {/* <Stack.Screen

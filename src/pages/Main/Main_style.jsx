@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  logo_text: {
+    fontFamily: 'Orbitron-VariableFont_wght',
+    fontSize: 20,
+  },
   init_img: {
     width: 150,
     height: 150,
@@ -29,8 +33,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   upload_btn: {
-    width: '90%',
-    height: '20%',
+    // width: '90%',
+    // height: '20%',
     margin: 10,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -38,6 +42,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderStyle: 'dashed',
+  },
+  upload_btn_img: {
+    width: 50,
+    height: 50,
   },
   upload_btn_text: {
     fontSize: 20,

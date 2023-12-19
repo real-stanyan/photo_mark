@@ -1,14 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  image: {
     width: '100%', // 宽度填满容器
-    // height: 'auto',
-  },
-  contentContainer: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    resizeMode: 'contain', // 'cover', 'contain', 'stretch',     'repeat', 'center'
   },
 });
 

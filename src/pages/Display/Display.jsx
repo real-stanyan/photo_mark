@@ -9,6 +9,7 @@ import {
 import React, {useState, useEffect} from 'react';
 
 import Basic from '../../frames/Basic/Basic';
+import Circles from '../../frames/Circles/Circles';
 import Frame from '../Frame/Frame';
 
 import styles from './Display.style';
@@ -22,12 +23,10 @@ const Display = ({route, navigation}) => {
   console.log('exifData', exifData);
   console.log('====================================');
 
-  //   const handlePress = () => {
-
-  //   };
-
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}>
       <TouchableOpacity
         onPress={() => {
           setFrame('Basic');
@@ -35,6 +34,7 @@ const Display = ({route, navigation}) => {
         }}>
         <Basic image={image} exifData={exifData} />
       </TouchableOpacity>
+      <Circles image={image} exifData={exifData} />
       <Frame
         visible={show}
         frame={frame}
@@ -43,7 +43,7 @@ const Display = ({route, navigation}) => {
         setShow={setShow}
       />
       {/* <Text>{image}</Text> */}
-    </View>
+    </ScrollView>
   );
 };
 

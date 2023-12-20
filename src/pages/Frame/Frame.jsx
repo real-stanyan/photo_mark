@@ -13,14 +13,25 @@ import Basic from '../../frames/Basic/Basic';
 import styles from './Frame.style';
 
 const Frame = props => {
+  const [editing, setEditing] = useState(false);
   const renderFrame = () => {
     if (props.frame === 'Basic') {
-      return <Basic image={props.image} exifData={props.exifData} />;
+      return (
+        <Basic
+          image={props.image}
+          exifData={props.exifData}
+          setEditing={setEditing}
+        />
+      );
     }
   };
   useEffect(() => {
     renderFrame();
   }, []);
+
+  console.log('====================================');
+  console.log(editing);
+  console.log('====================================');
 
   return (
     <Modal
@@ -31,7 +42,8 @@ const Frame = props => {
         props.setShow(false);
       }}
       style={styles.modal}>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        style={[editing ? {marginTop: -300} : {}, styles.container]}>
         {renderFrame()}
         {/* 按钮区域 */}
         <View style={styles.btn_area}>

@@ -1,4 +1,11 @@
-import {View, Text, Image, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  SafeAreaView,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 
 import getLogo from '../../utils/logo';
@@ -6,8 +13,12 @@ import LogoDatabase from '../../logos/logo_database';
 
 import styles from './Basic_style';
 
-const Basic = ({image, exifData}) => {
+const Basic = props => {
+  const {image, exifData, setEditing} = props;
   const aspectRatio = exifData.PixelWidth / exifData.PixelHeight;
+  const [modelEdit, setModelEdit] = useState(false);
+  const [model, setModel] = useState(exifData['{TIFF}'].Model);
+
   const [logo, setLogo] = useState(null);
   const [LensModelCount, setLensModelCount] = useState(0);
 
@@ -25,9 +36,7 @@ const Basic = ({image, exifData}) => {
     }
   }, []);
 
-  //   const logos = {
-  //     apple: require('../../logos/apple_logo.jpg'),
-  //   };
+  const handleModelEdit = props => {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -42,7 +51,25 @@ const Basic = ({image, exifData}) => {
             styles.exif_left,
             {width: LensModelCount > 30 ? '30%' : '40%'},
           ]}>
-          <Text style={styles.model}>{exifData['{TIFF}'].Model}</Text>
+          {/* Model */}
+          <TouchableOpacity onPress={() => setModelEdit(true)}>
+            {modelEdit ? (
+              <TextInput
+                value={model}
+                onChangeText={setModel}
+                style={{
+                  borderWidth: 1,
+                  borderColor: '#000',
+                  borderRadius: 5,
+                  padding: 5,
+                }}
+                onFocus={() => setEditing(true)}
+                onBlur={() => setEditing(false)}
+              />
+            ) : (
+              <Text style={styles.model}>{model}</Text>
+            )}
+          </TouchableOpacity>
         </View>
 
         {/* right */}

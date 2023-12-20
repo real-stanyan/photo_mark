@@ -30,6 +30,10 @@ const Layout = () => {
           component={Display}
           options={{
             title: 'Choose Frame',
+            headerTitleStyle: {
+              fontFamily: 'Orbitron-VariableFont_wght',
+              // fontSize: 30,
+            },
           }}
         />
         {/* <Stack.Screen

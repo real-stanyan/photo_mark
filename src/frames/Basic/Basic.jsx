@@ -11,39 +11,35 @@ import React, {useState, useEffect} from 'react';
 import getLogo from '../../utils/logo';
 import LogoDatabase from '../../logos/logo_database';
 
+import useImage from '../../stores/useImage';
+
 import styles from './Basic_style';
 
 const Basic = props => {
-  const {image, exifData, setEditing} = props;
-  const aspectRatio = exifData.PixelWidth / exifData.PixelHeight;
+  // const {exifData, setEditing} = props;
+  // const aspectRatio = exifData.PixelWidth / exifData.PixelHeight;
   const [modelEdit, setModelEdit] = useState(false);
-  const [model, setModel] = useState(exifData['{TIFF}'].Model);
+  // const [model, setModel] = useState(exifData['{TIFF}'].Model);
+  const {imageURI} = useImage();
 
   const [logo, setLogo] = useState(null);
   const [LensModelCount, setLensModelCount] = useState(0);
 
   useEffect(() => {
-    const ModelLogo = getLogo(exifData['{TIFF}'].Make);
-    console.log('====================================');
-    console.log('getLogo', ModelLogo);
-    console.log('====================================');
-    setLogo(ModelLogo);
+    console.log('Basic -', imageURI);
 
     //自适应
-    if (exifData['{Exif}'].LensModel) {
-      const LensModelCount = exifData['{Exif}'].LensModel.length;
-      setLensModelCount(LensModelCount);
-    }
+    // if (exifData['{Exif}'].LensModel) {
+    //   const LensModelCount = exifData['{Exif}'].LensModel.length;
+    //   setLensModelCount(LensModelCount);
+    // }
   }, []);
 
   const handleModelEdit = props => {};
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        source={{uri: image.uri}}
-        style={[styles.image, {aspectRatio: aspectRatio}]}
-      />
+      <Image source={{uri: imageURI}} style={[styles.image]} />
       <View style={styles.exif_container}>
         {/* left */}
         <View
@@ -67,7 +63,7 @@ const Basic = props => {
                 onBlur={() => setEditing(false)}
               />
             ) : (
-              <Text style={styles.model}>{model}</Text>
+              <Text style={styles.model}>model</Text>
             )}
           </TouchableOpacity>
         </View>
@@ -89,10 +85,12 @@ const Basic = props => {
           />
           <View style={{marginLeft: 10}}>
             <Text style={styles.LensModel}>
-              {exifData['{Exif}'].LensModel || 'no data'}
+              {/* {exifData['{Exif}'].LensModel || 'no data'} */}
+              11
             </Text>
             <Text style={styles.time}>
-              {exifData['{Exif}'].DateTimeOriginal}
+              {/* {exifData['{Exif}'].DateTimeOriginal} */}
+              11
             </Text>
           </View>
         </View>

@@ -21,7 +21,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   image: {
-    width: '100%', // 宽度填满容器
+    // width: '100%', // 宽度填满容器
+    minWidth: 100,
+    minHeight: 100,
     resizeMode: 'contain', // 'cover', 'contain', 'stretch',     'repeat', 'center'
   },
   exif_container: {

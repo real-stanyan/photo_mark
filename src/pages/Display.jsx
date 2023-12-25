@@ -1,5 +1,6 @@
 // import from React
 import {
+  ScrollView,
   View,
   Text,
   TouchableOpacity,
@@ -8,6 +9,9 @@ import {
 } from 'react-native';
 import {useState, useEffect} from 'react';
 
+// import Frames
+import Basic from '../frames/Basic';
+
 // import from Stores
 import useExif from '../stores/useExif';
 
@@ -15,21 +19,18 @@ import useExif from '../stores/useExif';
 const {width, height} = Dimensions.get('window');
 
 // CSS
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    width,
+    padding: width * 0.05,
+  },
+});
 // COMPONENT
 const Display = ({navigation}) => {
-  const {exif, width, height, model, brand} = useExif();
-
-  console.log('Display_exif: ', exif);
-  console.log('Display_width: ', width);
-  console.log('Display_height: ', height);
-  console.log('Display_model: ', model);
-  console.log('Display_brand: ', brand);
-
   return (
-    <View>
-      <Text>Display</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <Basic />
+    </ScrollView>
   );
 };
 

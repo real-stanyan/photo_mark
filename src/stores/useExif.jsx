@@ -4,6 +4,7 @@ const useExif = create(set => ({
   width: null,
   height: null,
   model: null,
+  lensModel: null,
   brand: null,
   ISO: null,
   shutterSpeed: null,
@@ -15,6 +16,7 @@ const useExif = create(set => ({
   setBrand: brand => set(state => ({brand: brand.toString()})),
   setModel: model => set(state => ({model: model.toString()})),
   setISO: ISO => set(state => ({ISO: ISO.toString()})),
+  setLensModel: lensModel => set(state => ({lensModel: lensModel.toString()})),
   setShutterSpeed: shutterSpeed =>
     set(state => ({shutterSpeed: shutterSpeed.toString()})),
   setF: f => set(state => ({f: f.toString()})),

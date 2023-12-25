@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  Alert,
 } from 'react-native';
 import {useState, useEffect} from 'react';
 
@@ -57,6 +58,7 @@ const Main = ({navigation}) => {
     setF,
     setExif,
     setBrand,
+    setLensModel,
   } = useExif();
 
   function convertToShutterSpeed(decimal) {
@@ -78,21 +80,22 @@ const Main = ({navigation}) => {
         try {
           const exif = await Exif.getExif(imageURI);
           //往store裡面塞資料
-          setWidth(exif.exif.PixelWidth || 'N/A');
-          setHeight(exif.exif.PixelHeight || 'N/A');
-          setModel(exif.exif['{TIFF}'].Model || 'N/A');
-          setExif(exif.exif || 'N/A');
-          setBrand(exif.exif['{TIFF}'].Make || 'N/A');
-          setISO(exif.exif['{Exif}'].ISOSpeedRatings[0] || 'N/A');
-          setF(exif.exif['{Exif}'].FNumber || 'N/A');
+          setWidth(exif.exif?.PixelWidth || 'N/A');
+          setHeight(exif.exif?.PixelHeight || 'N/A');
+          setModel(exif.exif['{TIFF}']?.Model || 'N/A');
+          setExif(exif?.exif || 'N/A');
+          setBrand(exif.exif['{TIFF}']?.Make || 'N/A');
+          setISO(exif.exif['{Exif}']?.ISOSpeedRatings[0] || 'N/A');
+          setF(exif.exif['{Exif}']?.FNumber || 'N/A');
+          setLensModel(exif.exif['{ExifAux}']?.LensModel || 'N/A');
           setShutterSpeed(
             convertToShutterSpeed(
-              parseFloat(exif.exif['{Exif}'].ExposureTime),
+              parseFloat(exif.exif['{Exif}']?.ExposureTime),
             ) || 'N/A',
           );
           navigation.navigate('Display');
         } catch (error) {
-          console.error(error);
+          Alert.alert('Error', error.message);
         }
       }
     };
@@ -106,11 +109,15 @@ const Main = ({navigation}) => {
     };
     try {
       launchImageLibrary(options, response => {
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+          return;
+        }
         console.log('Main_response: ', response.assets[0].uri);
         setImageURI(response.assets[0].uri);
       });
     } catch (err) {
-      console.log('Main_handleUpload_err: ', err);
+      //   console.log('Main_handleUpload_err: ', err);
     }
   };
 
